@@ -1,4 +1,4 @@
-var clippings_file = "My Clippings.txt";
+var clippings_file = "My Clippings 201406.txt";
 
 
 Exception = function() {}
@@ -61,9 +61,10 @@ var parse_clippings = function(clippings_text) {
 var CSVify = function(array_of_hashes) {
   var csv = "";
 
-  // Put double quotes around some text (which may contain quotes itself)
+  // Put double quotes around some text (which may contain quotes itself, which
+  // are replaces by other quotes as Anki does not like quoted quotes...)
   var quotes = function(text) {
-    return '"' + text.replace(/"/g, '\\"') + '"';
+    return '"' + text.replace(/"/g, '“') + '"';
   }
 
   // Check input
@@ -84,7 +85,7 @@ var CSVify = function(array_of_hashes) {
     csv += fields.map(function(field) {
       return quotes(array_of_hashes[i][field]);
     })
-    .join(",")
+    .join("\t")
       + "\n";
   }
 
