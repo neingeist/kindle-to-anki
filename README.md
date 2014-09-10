@@ -1,7 +1,8 @@
 Kindle → Anki
 =============
 
-Convert a Kindle "My Clippings.txt" file to a CSV file Anki can import.
+Convert a Kindle "My Clippings.txt" file to a tab-separated values file. Anki
+can import this file.
 
 It's work in progress. Don't use it.
 

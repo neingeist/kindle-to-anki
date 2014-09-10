@@ -58,8 +58,8 @@ var parse_clippings = function(clippings_text) {
   return clippings;
 };
 
-var CSVify = function(array_of_hashes) {
-  var csv = "";
+var TSVify = function(array_of_hashes) {
+  var tsv = "";
 
   // Put double quotes around some text (which may contain quotes itself, which
   // are replaces by other quotes as Anki does not like quoted quotes...)
@@ -80,22 +80,22 @@ var CSVify = function(array_of_hashes) {
   // First line decides the fields
   var fields = Object.keys(array_of_hashes[0]);
 
-  // Build CSV text from data
+  // Build TSV text from data
   for(var i=0; i<array_of_hashes.length; i++) {
-    csv += fields.map(function(field) {
+    tsv += fields.map(function(field) {
       return quotes(array_of_hashes[i][field]);
     })
     .join("\t")
       + "\n";
   }
 
-  return csv;
+  return tsv;
 };
 
-// CSVify(1);
-// CSVify("foo");
-// CSVify(["foo"]);
-// FIXME CSVify([["foo"]]);
+// TSVify(1);
+// TSVify("foo");
+// TSVify(["foo"]);
+// FIXME TSVify([["foo"]]);
 
 var fs = require('fs');
 
@@ -107,9 +107,9 @@ clippings_files.forEach(function(clippings_file) {
       throw new InvalidInputException('Error opening "' + clippings_file + '"');
     } else {
       var clippings = parse_clippings(text);
-      var csv = CSVify(clippings);
+      var tsv = TSVify(clippings);
 
-      process.stdout.write(csv);
+      process.stdout.write(tsv);
     }
   });
 });
