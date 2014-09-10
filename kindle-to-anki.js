@@ -1,7 +1,5 @@
 "use strict";
 
-var clippings_file = "My Clippings 201406.txt";
-
 
 var Exception = function() {}
 Exception.prototype.toString = function() {
@@ -100,15 +98,21 @@ var CSVify = function(array_of_hashes) {
 // FIXME CSVify([["foo"]]);
 
 var fs = require('fs');
-fs.readFile(clippings_file, 'utf-8', function(err, text) {
-  if (err) {
-    throw new InvalidInputException('Error opening "' + clippings_file + '"');
-  } else {
-    var clippings = parse_clippings(text);
-    var csv = CSVify(clippings);
 
-    process.stdout.write(csv);
-  }
+var clippings_files = process.argv.slice(2);
+
+clippings_files.forEach(function(clippings_file) {
+  fs.readFile(clippings_file, 'utf-8', function(err, text) {
+    if (err) {
+      throw new InvalidInputException('Error opening "' + clippings_file + '"');
+    } else {
+      var clippings = parse_clippings(text);
+      var csv = CSVify(clippings);
+
+      process.stdout.write(csv);
+    }
+  });
 });
+
 
 // FIXME: node clippings.js | head -1 => Unhandled 'error' event
