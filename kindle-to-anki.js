@@ -1,7 +1,9 @@
+"use strict";
+
 var clippings_file = "My Clippings 201406.txt";
 
 
-Exception = function() {}
+var Exception = function() {}
 Exception.prototype.toString = function() {
   var name = this.name || 'unknown';
   var message  = this.message || 'no description';
@@ -27,7 +29,7 @@ var parse_clippings = function(clippings_text) {
 
   // Parse clippings
   for(var i=0; i<clippings_texts.length; i++) {
-    clipping_text = clippings_texts[i];
+    var clipping_text = clippings_texts[i];
     var clipping = {};
 
     var lines = clipping_text.split("\r\n");
